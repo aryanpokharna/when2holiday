@@ -28,27 +28,6 @@
     text-align: center;
 }
 
-.calendar {
-    width: 80%; /* Ensure table fills its container */
-
-}
-
-.calendar td, th {
-    width: 1%; /* Set equal width for each cell */
-    text-align: center; /* Center-align content */
-    border: 2px solid #ddd; /* Add borders for clarity */
-}
-
-.calendar:hover {
-    cursor: pointer;
-}
-
-/* Selected day */
-.calendar td.selected {
-    /* Your styles for the selected day */
-    color: orange;
-}
-
 .App-footer {
     background-color: #282c34;
     padding: 10px;

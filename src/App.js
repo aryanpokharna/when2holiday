@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Calendar } from 'react-yearly-calendar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // react wrapper
-import { faHeart, faICursor} from '@fortawesome/free-solid-svg-icons'; // ind. comp.
+import { faHeart } from '@fortawesome/free-solid-svg-icons'; // ind. comp.
 import './App.css';
+import './Calendar.css';
 
 function MyYearlyCalendar() {
 
