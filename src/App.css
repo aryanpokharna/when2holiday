@@ -35,3 +35,16 @@
     text-align: center;
     justify-content: center;
 }
+
+.large-button {
+    font-size: 10px;
+    width: 40px;
+}
+
+.week-separators {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    padding: 20px;
+    width: 220px;
+}
