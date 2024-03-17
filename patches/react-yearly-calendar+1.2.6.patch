@@ -1,0 +1,84 @@
+diff --git a/node_modules/react-yearly-calendar/lib/Calendar.js b/node_modules/react-yearly-calendar/lib/Calendar.js
+index 23b517f..f580f81 100644
+--- a/node_modules/react-yearly-calendar/lib/Calendar.js
++++ b/node_modules/react-yearly-calendar/lib/Calendar.js
+@@ -47,6 +47,10 @@ var propTypes = {
+   onPickDate: _propTypes2.default.func,
+   onPickRange: _propTypes2.default.func,
+   selectedDay: _reactMomentProptypes.momentObj,
++
++  onPickDates: _propTypes2.default.func, // Function for multiple selected dates
++  selectedDays: _propTypes2.default.arrayOf(_reactMomentProptypes.momentObj), // Array of moment objects for multiple selected days
++
+   customClasses: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func]),
+   titles: _propTypes2.default.func
+ };
+@@ -61,6 +65,10 @@ var defaultProps = {
+   onPickDate: null,
+   onPickRange: null,
+   selectedDay: (0, _moment2.default)(),
++
++  onPickDates: null, // Not sure why null.
++  selectedDays: [], // No days are selected at initialisation.
++
+   customClasses: null,
+   titles: null
+ };
+@@ -92,15 +100,23 @@ var Calendar = function (_Component) {
+           selectRange = _props.selectRange,
+           onPickRange = _props.onPickRange,
+           onPickDate = _props.onPickDate;
++          onPickDates = _props.onPickDates;
+ 
+ 
+-      if (!selectRange) {
++      if (!selectRange && false) { // Disabled
+         if (onPickDate instanceof Function) {
+-          onPickDate(date, classes);
++          onPickDate(date, classes); // Function passed through parent component i.e. App.js
+         }
+         return;
+       }
+ 
++      // Call onPickDates function with an array containing only the selected date and classes
++      if (!selectRange) {
++        if (onPickDates instanceof Function) {
++          onPickDates([date], classes);
++        }
++      }
++
+       if (!selectingRange) {
+         selectingRange = [date, date];
+       } else {
+@@ -128,7 +144,6 @@ var Calendar = function (_Component) {
+ 
+       var selectingRange = this.state.selectingRange;
+       
+-
+       if (selectingRange) {
+         selectingRange[1] = hoveredDay;
+ 
+diff --git a/node_modules/react-yearly-calendar/lib/Month.js b/node_modules/react-yearly-calendar/lib/Month.js
+index 24769aa..768009b 100644
+--- a/node_modules/react-yearly-calendar/lib/Month.js
++++ b/node_modules/react-yearly-calendar/lib/Month.js
+@@ -42,6 +42,9 @@ var propTypes = {
+   forceFullWeeks: _propTypes2.default.bool.isRequired,
+   showWeekSeparators: _propTypes2.default.bool.isRequired,
+   selectedDay: _reactMomentProptypes.momentObj.isRequired,
++
++  selectedDays: _propTypes2.default.arrayOf(_reactMomentProptypes.momentObj), // Array of moment objects
++
+   firstDayOfWeek: _propTypes2.default.number.isRequired,
+   selectingRange: _propTypes2.default.arrayOf(_reactMomentProptypes.momentObj),
+   selectRange: _propTypes2.default.bool.isRequired,
+@@ -53,6 +56,9 @@ var propTypes = {
+ };
+ 
+ var defaultProps = {
++
++  selectedDays: undefined,
++
+   selectingRange: undefined,
+   selectedRange: undefined,
+   customClasses: undefined,

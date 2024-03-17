@@ -6,25 +6,50 @@ import './App.css';
 import './Calendar.css';
 import moment from 'moment';
 
+// #1 show all previously selected dates
+// #2 unselect previous dates
+// #3 range + unselects
+
 function MyYearlyCalendar() {
 
   const currentYear = new Date().getFullYear();
-  const now = moment();
-  const tomorrow = moment().add(1, 'day');
+
+  // Function & State for date range
+  const start = moment();
+  const finish = moment().add(1, 'day');
 
   // State to store the selected dates
-  const [selectedDates, setSelectedDates] = useState([]);
-  function newDatePicked(date) {
-    setSelectedDates(prevSelectedDates => [...prevSelectedDates, date]); // get the most recent state, ... is the spread operator, creates clone of existing array + appends date
-    console.log(selectedDates)
+  const [multipleDates, setMultipleDates] = useState([]);
+  function setMultiplePicked(date) {
+    setMultipleDates(prevSelectedDates => [...prevSelectedDates, date]); // get the most recent state, ... is the spread operator, creates clone of existing array + appends date
   }
 
   // State to store the selected dates
   const [pick, setPick] = useState(moment());
   function setPicked(date) {
-    setPick(date);
-    newDatePicked(date);
+    setPick(date); // last selected date
+    // toggleSelection(date); // all previously selected dates
+    // console.log(selectedDates)
   }
+
+  // Remove date if already included
+  // function toggleSelection(date) {
+  //   let inArray = false;
+  //   for (let i = 0; i < selectedDates.length; i++) {
+  //     if (
+  //       selectedDates[i]._i[0] === date._i[0] &&
+  //       selectedDates[i]._i[1] === date._i[1] &&
+  //       selectedDates[i]._i[2] === date._i[2]
+  //     ) {
+  //       selectedDates.splice(i, 1); // Use splice to remove the element at index i
+  //       inArray = true;
+  //       break; // Exit the loop once the date is found and removed
+  //     }
+  //   }
+  //   if (!inArray) {
+  //     newDatePicked(date);
+  //   }
+  // }
 
   // Function to toggle Week Separators
   const [WeekSeparators, setWeekSeparators] = useState(false);
@@ -32,10 +57,15 @@ function MyYearlyCalendar() {
     setWeekSeparators(!WeekSeparators);
   };
 
-  // Function to toggle Date Range
-  const [DateRange, setDateRange] = useState(false);
+  // Function + State to toggle Date Range
+  const [toggleRange, setDateRange] = useState(false);
   const toggleDateRange = () => {
-    setDateRange(!DateRange);
+    setDateRange(!toggleRange);
+  };
+
+  // Function to check if a date is selected
+  const isSelected = (date) => {
+    return true;
   };
 
   return (
@@ -54,10 +84,17 @@ function MyYearlyCalendar() {
         <Calendar 
           year={currentYear}
           showWeekSeparators={WeekSeparators}
-          // selectRange={DateRange}
-          // selectedRange={[now, tomorrow]}
           onPickDate={setPicked}
           selectedDay={pick}
+
+          // Multiple single selected dates
+          onPickDates={setMultiplePicked}
+          selectedDays={multipleDates}
+
+          // onPickRange={setRange} // implement set range.
+          // selectRange={toggleRange}
+          // selectedRange={[start, finish]}
+          
         />
 
         <div className='week-separators'>
@@ -67,7 +104,7 @@ function MyYearlyCalendar() {
 
         <div className='week-separators'>
           <p>Enable Date Range</p>
-          <button class="large-button" onClick={toggleDateRange}>{DateRange ? 'No' : 'Yes'}</button>
+          <button class="large-button" onClick={toggleDateRange}>{toggleRange ? 'No' : 'Yes'}</button>
         </div>
         
 
