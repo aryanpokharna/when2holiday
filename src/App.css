@@ -1,50 +1,108 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Quicksand', Arial;
+  margin: 0;
+  padding: 0;
+  font-family: "Quicksand", Arial;
 }
 
 .App {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .App-body {
-    align-items: center;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .event-name {
-    all: initial;
-    border: none;
-    background-color: transparent;
-    color: black;
-    font-family: 'Quicksand';
-    font-weight: 300;
-    text-align: center;
+  all: initial;
+  border: none;
+  background-color: transparent;
+  color: black;
+  font-family: "Quicksand";
+  font-weight: 300;
+  text-align: center;
 }
 
 .App-footer {
-    background-color: #282c34;
-    padding: 10px;
-    color: white;
-    text-align: center;
-    justify-content: center;
+  background-color: #282c34;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  justify-content: center;
 }
 
 .large-button {
-    font-size: 10px;
-    width: 40px;
+  font-size: 10px;
+  width: 40px;
 }
 
 .week-separators {
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
-    padding: 20px;
-    width: 220px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  width: 220px;
+}
+
+/* Multiple Date Ranges Styles */
+.selected-ranges {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.selected-ranges h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 18px;
+}
+
+.range-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 5px 0;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.range-item span {
+  font-size: 14px;
+  color: #495057;
+  font-weight: 500;
+}
+
+.remove-range {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.remove-range:hover {
+  background-color: #c82333;
+}
+
+.remove-range:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
 }
